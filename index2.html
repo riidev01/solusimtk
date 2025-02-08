@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solusi Matematika</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+    }
+
+    section {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Solusi Matematika</h1>
+      <p>Website untuk menyelesaikan masalah matematika dengan mudah.</p>
+    </div>
+  </header>
+
+  <!-- Kalkulator Sederhana -->
+  <section id="kalkulator">
+    <div class="container">
+      <h2>Kalkulator Sederhana</h2>
+      <div class="calculator">
+        <input type="number" id="num1" placeholder="Angka pertama">
+        <input type="number" id="num2" placeholder="Angka kedua">
+        <select id="operator">
+          <option value="tambah">+</option>
+          <option value="kurang">-</option>
+          <option value="kali">×</option>
+          <option value="bagi">÷</option>
+        </select>
+        <button onclick="hitung()">Hitung</button>
+        <p>Hasil: <span id="hasil-kalkulator"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Penyelesaian Persamaan Kuadrat -->
+  <section id="persamaan-kuadrat">
+    <div class="container">
+      <h2>Penyelesaian Persamaan Kuadrat</h2>
+      <div class="quadratic">
+        <input type="number" id="a" placeholder="Koefisien a">
+        <input type="number" id="b" placeholder="Koefisien b">
+        <input type="number" id="c" placeholder="Koefisien c">
+        <button onclick="hitungPersamaanKuadrat()">Hitung</button>
+        <p>Solusi: <span id="hasil-persamaan"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Konversi Satuan -->
+  <section id="konversi-satuan">
+    <div class="container">
+      <h2>Konversi Satuan</h2>
+      <div class="converter">
+        <input type="number" id="nilai" placeholder="Nilai">
+        <select id="satuan-dari">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+        </select>
+        <select id="satuan-ke">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+        </select>
+        <button onclick="konversiSatuan()">Konversi</button>
+        <p>Hasil: <span id="hasil-konversi"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Solusi Matematika. Dibuat dengan ❤️ oleh Fahri.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Fungsi Kalkulator Sederhana
+    function hitung() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operator = document.getElementById('operator').value;
+      let hasil;
+
+      switch (operator) {
+        case 'tambah':
+          hasil = num1 + num2;
+          break;
+        case 'kurang':
+          hasil = num1 - num2;
+          break;
+        case 'kali':
+          hasil = num1 * num2;
+          break;
+        case 'bagi':
+          hasil = num1 / num2;
+          break;
+        default:
+          hasil = "Operasi tidak valid";
+      }
+
+      document.getElementById('hasil-kalkulator').textContent = hasil;
+    }
+
+    // Fungsi Penyelesaian Persamaan Kuadrat
+    function hitungPersamaanKuadrat() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+      const diskriminan = b * b - 4 * a * c;
+      let solusi;
+
+      if (diskriminan > 0) {
+        const x1 = (-b + Math.sqrt(diskriminan)) / (2 * a);
+        const x2 = (-b - Math.sqrt(diskriminan)) / (2 * a);
+        solusi = `x₁ = ${x1.toFixed(2)}, x₂ = ${x2.toFixed(2)}`;
+      } else if (diskriminan === 0) {
+        const x = (-b / (2 * a)).toFixed(2);
+        solusi = `x = ${x}`;
+      } else {
+        solusi = "Tidak ada solusi real";
+      }
+
+      document.getElementById('hasil-persamaan').textContent = solusi;
+    }
+
+    // Fungsi Konversi Satuan
+    function konversiSatuan() {
+      const nilai = parseFloat(document.getElementById('nilai').value);
+      const satuanDari = document.getElementById('satuan-dari').value;
+      const satuanKe = document.getElementById('satuan-ke').value;
+      let hasil;
+
+      // Konversi ke meter terlebih dahulu
+      let nilaiDalamMeter;
+      switch (satuanDari) {
+        case 'meter':
+          nilaiDalamMeter = nilai;
+          break;
+        case 'kilometer':
+          nilaiDalamMeter = nilai * 1000;
+          break;
+        case 'centimeter':
+          nilaiDalamMeter = nilai / 100;
+          break;
+      }
+
+      // Konversi dari meter ke satuan tujuan
+      switch (satuanKe) {
+        case 'meter':
+          hasil = nilaiDalamMeter;
+          break;
+        case 'kilometer':
+          hasil = nilaiDalamMeter / 1000;
+          break;
+        case 'centimeter':
+          hasil = nilaiDalamMeter * 100;
+          break;
+      }
+
+      document.getElementById('hasil-konversi').textContent = hasil.toFixed(2);
+    }
+  </script>
+</body>
+</html>
